@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TZ: "Europe/Moscow"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      TZ: "Europe/Moscow"
+      POSTGRES_DB: social_network
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpwd
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U pguser -d social_network" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
