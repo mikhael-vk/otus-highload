@@ -2,7 +2,7 @@ FROM maven:3.9.6-eclipse-temurin-21-jammy as build_package
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-RUN mvn clean package -Dskip.tests
+RUN mvn clean package -Dmaven.test.skip=true
 
 FROM eclipse-temurin:21.0.3_9-jdk-ubi9-minimal as build_layers
 WORKDIR /app
