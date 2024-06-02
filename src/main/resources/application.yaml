@@ -7,6 +7,11 @@ spring:
     username: ${JDBC_USERNAME:pguser}
     password: ${JDBC_PASSWORD:pgpwd}
 
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: ${SPRING_JDBC:ERROR}
+    org.springframework.security: ${SPRING_SECURITY:ERROR}
+
 management:
   endpoint:
     health:

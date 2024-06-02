@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1.0.000"
+      author: Kondrashkin-MV
+      changes:
+        - createTable:
+            tableName: user_entity
+            columns:
+              - column:
+                  name: pk_id
+                  type: bigserial
+                  autoIncrement: true
+              - column:
+                  name: id
+                  type: varchar(36)
+              - column:
+                  name: first_name
+                  type: varchar(255)
+              - column:
+                  name: second_name
+                  type: varchar(255)
+              - column:
+                  name: birthdate
+                  type: date
+              - column:
+                  name: biography
+                  type: text
+              - column:
+                  name: city
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp with time zone
+              - column:
+                  name: updated_at
+                  type: timestamp with time zone
+        - createTable:
+            tableName: user_credential
+            columns:
+              - column:
+                  name: pk_id
+                  type: bigserial
+                  autoIncrement: true
+              - column:
+                  name: user_pk_id
+                  type: bigint
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp with time zone
+              - column:
+                  name: updated_at
+                  type: timestamp with time zone
+
