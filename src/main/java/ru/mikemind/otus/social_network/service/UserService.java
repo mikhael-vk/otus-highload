@@ -11,6 +11,7 @@ import ru.mikemind.otus.social_network.repository.UserRepository;
 
 import java.security.SecureRandom;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -43,6 +44,10 @@ public class UserService {
 
     public Optional<UserEntity> getById(@NotNull String id) {
         return userRepository.getById(id);
+    }
+
+    public List<UserEntity> findByFirstNameAndSecondName(@NotNull String firstName, @NotNull String secondName) {
+        return userRepository.findAllByFirstNameAndSecondName("%" + firstName + "%", "%" + secondName + "%");
     }
 
 }

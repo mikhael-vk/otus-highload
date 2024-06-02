@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 import ru.mikemind.otus.social_network.exception.ResourceNotFoundException;
 import ru.mikemind.otus.social_network.mapping.UserMapper;
 import ru.mikemind.otus.social_network.model.User;
@@ -13,6 +12,9 @@ import ru.mikemind.otus.social_network.model.UserEntity;
 import ru.mikemind.otus.social_network.model.UserRegisterPost200Response;
 import ru.mikemind.otus.social_network.model.UserRegisterPostRequest;
 import ru.mikemind.otus.social_network.service.UserService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -34,5 +36,12 @@ public class UserApiController implements UserApi {
         return userService.getById(id)
                 .map(us -> new ResponseEntity<>(userMapper.entityToUserResponse(us), HttpStatus.OK))
                 .orElseThrow(() -> new ResourceNotFoundException("User with id=%s not found".formatted(id)));
+    }
+
+    @Override
+    public ResponseEntity<List<User>> userSearchGet(String firstName, String lastName) {
+        List<User> responseUsers = userService.findByFirstNameAndSecondName(firstName, lastName).stream()
+                .map(userMapper::entityToUserResponse).collect(Collectors.toList());
+        return new ResponseEntity<>(responseUsers, HttpStatus.OK);
     }
 }
