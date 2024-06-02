@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "3702783e-fe56-47db-aa04-404d9f391f38",
+		"name": "highload_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9041039"
+	},
+	"item": [
+		{
+			"name": "User GetById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiIwIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMThmZDhiMS01Y2Y0LTcxNmMtYmNlMi1mZWUxOGYxY2MzNDciLCJpYXQiOjE3MTczNTE4MDcsImV4cCI6MTcxNzM1NTQwN30.WXlMVqqAX7DVEizeGCVo3B25YChS4rR2pKl2beNPhK_kfQYo8GYb9qSPx7yvApkNABTex-FD0C0Ja8DGbThY6Obs9UToLcvYXBRP5e6NDLd2rJR5jeXh65T2tM41Qmcil38wYg3S9rI-dJXHDSdxQ16Ch1CLpFKSe-wNRd3oHunXYm61peNGIg2aGFiRr8e2Cv5LLPEVYmOVLji8KBmfkvKYUzbLS97UOaFw7QVLdDD8X9RA-aygUpBUdmuhf7IjV4GFpQFmKWBN_U31SPRqW-4GCiCFwlOj66qEE4EYKGMoiiFFQvkN3yFpUzWQ5bxlPtVGfRKpoqUfHcO-i-4WKw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/user/get/018fda2a-87a4-7de8-b417-2b9dc877a040",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"get",
+						"018fda2a-87a4-7de8-b417-2b9dc877a040"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"Петр\",\r\n  \"second_name\": \"Иванов\",\r\n  \"birthdate\": \"1987-06-01\",\r\n  \"biography\": \"Хобби, интересы и т.п.\",\r\n  \"city\": \"Москва\",\r\n  \"password\": \"Пароль\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Search",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiIwIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMThmZGEyYS04N2E0LTdkZTgtYjQxNy0yYjlkYzg3N2EwNDAiLCJpYXQiOjE3MTczNTIxODksImV4cCI6MTcxNzM1NTc4OX0.LGfSelxjYr3ZuFMm7cK8lyGnsYH5yJurD148wm_IGTWj3twTMd_-yIBVw-_qukmQ5ddyJmDlA21BzNoPnvsw6utCX4MYTqx5_4QaDXn2ntUO616KFBJV0PC-or-G3flcmFD8fZl-zCAC3NUakv_RhsO8fdLJVol-_rnNdfPHx6dibaxIzNlcs34GwaDi82gq8iVBaJsLO7XXMELw-tYLDFT6MAVvs_kOYfWDiDTPbwgX1Ivfv_tG-B5pAW7J-Cfjk55ltlLoen5s6cr8BpavVKPj867syW3hi_taWPhg02Sc849vqefAh1X_aJgiRzAw2YCTqHZFeShQ-x7YJsm3pg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/user/search?first_name=р&last_name=и",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"search"
+					],
+					"query": [
+						{
+							"key": "first_name",
+							"value": "р"
+						},
+						{
+							"key": "last_name",
+							"value": "и"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"018fda2a-87a4-7de8-b417-2b9dc877a040\",\r\n  \"password\": \"Пароль\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
