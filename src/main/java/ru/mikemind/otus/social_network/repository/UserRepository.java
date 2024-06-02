@@ -14,7 +14,8 @@ public interface UserRepository extends ListCrudRepository<UserEntity, Long> {
     @Query("select * from user_entity where id = :id")
     Optional<UserEntity> getById(String id);
 
-    @Query("select * from user_entity where first_name like :firstName and second_name like :secondName")
+    @Query("select * from user_entity where lower(first_name) like lower(:firstName) " +
+            "and lower(second_name) like lower(:secondName)")
     List<UserEntity> findAllByFirstNameAndSecondName(String firstName, String secondName);
 
 }
