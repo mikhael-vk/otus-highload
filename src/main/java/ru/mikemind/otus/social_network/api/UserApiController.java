@@ -26,7 +26,7 @@ public class UserApiController implements UserApi {
 
     @Override
     public ResponseEntity<UserRegisterPost200Response> userRegisterPost(UserRegisterPostRequest userRegisterPostRequest) {
-        UserEntity userEntity = userService.register(userMapper.requestToEntity(userRegisterPostRequest));
+        UserEntity userEntity = userService.register(userMapper.registerRequestToEntity(userRegisterPostRequest));
         return new ResponseEntity<>(new UserRegisterPost200Response()
                 .userId(userEntity.getId()), HttpStatus.OK);
     }

@@ -12,6 +12,12 @@ logging:
     org.springframework.jdbc.core.JdbcTemplate: ${SPRING_JDBC:ERROR}
     org.springframework.security: ${SPRING_SECURITY:ERROR}
 
+jwt:
+  expiration_minutes: ${JWT_EXPIRATION_MINUTES:60}
+  private_key:
+    path: ${JWT_PRIVATE_KEY_PATH:classpath:jwt/private_key.der}
+    alg: "RSA"
+
 management:
   endpoint:
     health:
