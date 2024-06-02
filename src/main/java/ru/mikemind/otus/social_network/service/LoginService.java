@@ -1,7 +1,6 @@
 package ru.mikemind.otus.social_network.service;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,11 +44,9 @@ public class LoginService {
         Instant issuedAt = Instant.now();
         Instant expiration = issuedAt.plusSeconds(60 * expirationMinutes);
         return Jwts.builder().header().keyId("0").and()
-                .claims()
                 .subject(userEntity.getId())
                 .issuedAt(Date.from(issuedAt))
                 .expiration(Date.from(expiration))
-                .and()
                 .signWith(privateKey, Jwts.SIG.RS256)
                 .compact();
     }

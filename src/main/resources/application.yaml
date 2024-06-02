@@ -14,9 +14,12 @@ logging:
 
 jwt:
   expiration_minutes: ${JWT_EXPIRATION_MINUTES:60}
+  alg: "RSA"
   private_key:
     path: ${JWT_PRIVATE_KEY_PATH:classpath:jwt/private_key.der}
-    alg: "RSA"
+  public_key:
+    path: ${JWT_PUBLIC_KEY_PATH:classpath:jwt/public_key.der}
+
 
 management:
   endpoint:
