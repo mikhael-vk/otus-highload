@@ -2,6 +2,7 @@ package ru.mikemind.otus.social_network.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,7 +26,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    private final PublicKey publicKey;
+    private final JwtParser jwtParser;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -54,11 +55,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser()
-                .verifyWith(publicKey)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+        return jwtParser.parseSignedClaims(token).getPayload();
     }
 
 }

@@ -1,5 +1,7 @@
 package ru.mikemind.otus.social_network.security;
 
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +43,11 @@ public class KeysConfiguration {
         X509EncodedKeySpec spec = new X509EncodedKeySpec(bytes);
         KeyFactory kf = KeyFactory.getInstance(keyFactoryAlgorithm);
         return kf.generatePublic(spec);
+    }
+
+    @Bean
+    public JwtParser jetParser(PublicKey publicKey) {
+        return Jwts.parser().verifyWith(publicKey).build();
     }
 
 }
