@@ -3,6 +3,14 @@ receivers:
     protocols:
       http:
       grpc:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: "example"
+          scrape_interval: 5s
+          metrics_path: '/actuator/prometheus'
+          static_configs:
+            - targets: ["app:8080"]
 
 processors:
   # batch metrics before sending to reduce API usage
@@ -15,10 +23,10 @@ exporters:
 #  loki:
 #    endpoint: "http://loki:3100/loki/api/v1/push"
 
-  prometheus:
-    endpoint: "0.0.0.0:8889"
-    const_labels:
-      label1: value1
+#  prometheus:
+#    endpoint: "0.0.0.0:8889"
+#    const_labels:
+#      label1: value1
 
 #  otlp:
 #    endpoint: tempo:4317
@@ -30,7 +38,7 @@ exporters:
 #    format: proto
 
   otlp:
-    endpoint: jaeger:4317
+    endpoint: 172.20.17.150:4317
     tls:
       insecure: true
 
@@ -47,9 +55,9 @@ service:
   extensions: [health_check, pprof, zpages]
   pipelines:
     metrics:
-      receivers: [otlp]
+      receivers: [prometheus]
       processors: [batch]
-      exporters: [prometheus]
+      exporters: [otlp]
     traces:
       receivers: [otlp]
       processors: [batch]
