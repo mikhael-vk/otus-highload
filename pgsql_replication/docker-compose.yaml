@@ -1,0 +1,71 @@
+services:
+  db_pgmaster:
+    container_name: pgmaster
+    image: postgres:16-alpine
+    environment:
+      TZ: "Europe/Moscow"
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - pgmaster_data:/var/lib/postgresql/data
+    networks:
+      - pgnet
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  db_pgslave:
+    container_name: pgslave
+    image: postgres:16-alpine
+    environment:
+      TZ: "Europe/Moscow"
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - pgslave_data:/var/lib/postgresql/data
+    networks:
+      - pgnet
+    ports:
+      - "15432:5432"
+    restart: unless-stopped
+
+  db_pgasyncslave:
+    container_name: pgasyncslave
+    image: postgres:16-alpine
+    environment:
+      TZ: "Europe/Moscow"
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - pgasyncslave_data:/var/lib/postgresql/data
+    networks:
+      - pgnet
+    ports:
+      - "25432:5432"
+    restart: unless-stopped
+
+  db_pgstandalone:
+    container_name: pgstandalone
+    image: postgres:16-alpine
+    environment:
+      TZ: "Europe/Moscow"
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - pgstandalone_data:/var/lib/postgresql/data
+    networks:
+      - pgnet
+    ports:
+      - "35432:5432"
+    restart: unless-stopped
+
+volumes:
+  pgmaster_data:
+  pgslave_data:
+  pgasyncslave_data:
+  pgstandalone_data:
+
+networks:
+  pgnet:
+    ipam:
+      driver: default
+      config:
+          - subnet: "172.21.0.0/16"
+            gateway: "172.21.0.1"
+
