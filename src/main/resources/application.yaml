@@ -13,6 +13,8 @@ spring:
         ApplicationName: ${JDBC_APP_NAME:socialNetwork}
   liquibase:
     url: ${JDBC_LIQUIBASE_URL:jdbc:postgresql://localhost:5432/social_network}
+    user: ${JDBC_USERNAME:pguser}
+    password: ${JDBC_PASSWORD:pgpwd}
 
 logging:
   level:
