@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.mikemind.otus.social_network.model.UserCredentialEntity;
 import ru.mikemind.otus.social_network.model.UserEntity;
 import ru.mikemind.otus.social_network.repository.UserRepository;
@@ -16,6 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserService {
 
@@ -24,6 +26,7 @@ public class UserService {
 
     private static final SecureRandom secureRandom = new SecureRandom();
 
+    @Transactional
     public UserEntity register(@NotNull UserEntity userEntity) {
         UUID uuid = Generators.timeBasedEpochRandomGenerator(secureRandom).generate();
         userEntity.setId(uuid.toString());

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.mikemind.otus.social_network.exception.UserNotAuthenticatedException;
 import ru.mikemind.otus.social_network.model.UserCredentialEntity;
 import ru.mikemind.otus.social_network.model.UserEntity;
@@ -16,6 +17,7 @@ import java.time.Instant;
 import java.util.Date;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class LoginService {
 
