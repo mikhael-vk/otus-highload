@@ -11,6 +11,8 @@ spring:
         assumeMinServerVersion: ${JDBC_MIN_SERVER_VERSION:10.0}
         loadBalanceHosts: ${JDBC_LOAD_BALANCE_HOSTS:true}
         ApplicationName: ${JDBC_APP_NAME:socialNetwork}
+  liquibase:
+    url: ${JDBC_LIQUIBASE_URL:jdbc:postgresql://localhost:5432/social_network}
 
 logging:
   level:
