@@ -53,4 +53,10 @@ databaseChangeLog:
               - column:
                   name: updated_at
                   type: timestamp with time zone
-
+  - changeSet:
+      id: "1.0.001"
+      author: Kondrashkin-MV
+      changes:
+        - sql:
+            dbms: 'postgres'
+            sql: create index "idx-user_entity-first_second_name" on user_entity using gin (lower(first_name::text) gin_trgm_ops, lower(second_name::text) gin_trgm_ops);
