@@ -58,5 +58,5 @@ databaseChangeLog:
       author: Kondrashkin-MV
       changes:
         - sql:
-            dbms: 'postgres'
+            dbms: 'postgresql'
             sql: create index "idx-user_entity-first_second_name" on user_entity using gin (lower(first_name::text) gin_trgm_ops, lower(second_name::text) gin_trgm_ops);
